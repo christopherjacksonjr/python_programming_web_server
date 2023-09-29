@@ -13,7 +13,7 @@ def webServer(port=13331):
 
   while True:
     connectionSocket, addr = serverSocket.accept()
-    outputdata = b"Content-Type: text/html; charset=UTF-8\r\nConnection: Keep-Alive\r\nServer: Apache/2.4.6 (CentOS) OpenSSL/1.0.2k-fips PHP/7.4.33 mod_perl/2.0.11 Perl/v5.16.3\r\n".decode()
+    outputdata = "Content-Type: text/html; charset=UTF-8\r\nConnection: Keep-Alive\r\nServer: Apache/2.4.6 (CentOS) OpenSSL/1.0.2k-fips PHP/7.4.33 mod_perl/2.0.11 Perl/v5.16.3\r\n"
 
     try:
       message = connectionSocket.recv(1024).decode()
