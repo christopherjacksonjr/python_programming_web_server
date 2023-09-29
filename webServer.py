@@ -27,7 +27,7 @@ def webServer(port=13331):
 
     except Exception as e:
       print("Exception: ", e)
-      response = 'HTTP/1.1 404 Not Found\n' + outputdata.decode() + '\n\n' + '<h1>404 Not Found</h1>'
+      response = 'HTTP/1.1 404 Not Found\n' + outputdata.decode() + '\n' + '<h1>404 Not Found</h1>'
       connectionSocket.sendall(response.encode())
       connectionSocket.close()
 
