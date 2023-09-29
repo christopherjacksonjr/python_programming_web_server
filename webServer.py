@@ -18,21 +18,18 @@ def webServer(port=13331):
     serverData = b"Server: Apache/2.4.6 (CentOS) OpenSSL/1.0.2k-fips PHP/7.4.33 mod_perl/2.0.11 Perl/v5.16.3\r\n\r\n"
     headers = outputdata + connectionData + serverData
 
-    # headers = b"Content-Type: text/html; charset=UTF-8\r\n" + b"Connection: Keep-Alive\r\n" + b"Server: Apache/2.4.6 (CentOS) OpenSSL/1.0.2k-fips PHP/7.4.33 mod_perl/2.0.11 Perl/v5.16.3\r\n"
-
     try:
       message = connectionSocket.recv(1024).decode()
       filename = message.split()[1]
       f = open(filename[1:], "r")
-      # headers = 'Content-Type: text/html; charset=UTF-8\r\nConnection: Keep-Alive\r\nServer: Apache/2.4.6 (CentOS) OpenSSL/1.0.2k-fips PHP/7.4.33 mod_perl/2.0.11 Perl/v5.16.3'
       fileContent = f.read()
-      response = 'HTTP/1.1 200 OK\n' + headers.decode() + '\n' + fileContent
+      response = 'HTTP/1.1 200 OK\n' + headers.decode() + fileContent
       connectionSocket.sendall(response.encode())
       connectionSocket.close()
 
     except Exception as e:
       print("Exception: ", e)
-      response = 'HTTP/1.1 404 Not Found\n' + headers.decode() + '\n' + '<h1>404 Not Found</h1>'
+      response = 'HTTP/1.1 404 Not Found\n' + headers.decode() + '<h1>404 Not Found</h1>'
       connectionSocket.sendall(response.encode())
       connectionSocket.close()
 
