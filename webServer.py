@@ -19,14 +19,15 @@ def webServer(port=13331):
       filename = message.split()[1]
       f = open(filename[1:], "r")
       outputdata = b"Content-Type: text/html; charset=UTF-8\r\n".decode()
+      # headers = 'Content-Type: text/html'
       fileContent = f.read()
-      response = 'HTTP/1.1 200 OK\n\n' + outputdata + fileContent
+      response = 'HTTP/1.1 200 OK\n' + outputdata + '\n\n' + fileContent
       connectionSocket.sendall(response.encode())
       connectionSocket.close()
 
     except Exception as e:
       print("Exception: ", e)
-      response = 'HTTP/1.1 404 Not Found\n\n<h1>Not Found</h1>'
+      response = 'HTTP/1.1 404 Not Found\n\n<h1>404 Not Found</h1>'
       connectionSocket.sendall(response.encode())
       connectionSocket.close()
 
