@@ -18,10 +18,10 @@ def webServer(port=13331):
       message = connectionSocket.recv(1024).decode()
       filename = message.split()[1]
       f = open(filename[1:], "r")
-      # outputdata = b"Content-Type: text/html; charset=UTF-8\r\n".decode()
-      headers = 'Content-Type: text/html; charset=UTF-8\r\nConnection: Keep-Alive\r\nServer: Apache/2.4.6 (CentOS) OpenSSL/1.0.2k-fips PHP/7.4.33 mod_perl/2.0.11 Perl/v5.16.3'
+      outputdata = b"Content-Type: text/html; charset=UTF-8\r\nConnection: Keep-Alive\r\nServer: Apache/2.4.6 (CentOS) OpenSSL/1.0.2k-fips PHP/7.4.33 mod_perl/2.0.11 Perl/v5.16.3".decode()
+      # headers = 'Content-Type: text/html; charset=UTF-8\r\nConnection: Keep-Alive\r\nServer: Apache/2.4.6 (CentOS) OpenSSL/1.0.2k-fips PHP/7.4.33 mod_perl/2.0.11 Perl/v5.16.3'
       fileContent = f.read()
-      response = 'HTTP/1.1 200 OK\n' + headers + '\n\n' + fileContent
+      response = 'HTTP/1.1 200 OK\n' + outputdata + '\n\n' + fileContent
       connectionSocket.sendall(response.encode())
       connectionSocket.close()
 
